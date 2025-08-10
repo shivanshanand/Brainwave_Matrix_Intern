@@ -34,10 +34,10 @@ const MainFooter = () => {
   ];
 
   const features = [
-    { label: "AI Insights", path: "/features/ai" },
-    { label: "Expense Tracking", path: "/features/tracking" },
-    { label: "Smart Analytics", path: "/features/analytics" },
-    { label: "Goal Setting", path: "/features/goals" },
+    { label: "AI Insights" },
+    { label: "Expense Tracking" },
+    { label: "Smart Analytics" },
+    { label: "Goal Setting" },
   ];
 
   return (
@@ -123,10 +123,7 @@ const MainFooter = () => {
             <ul className="space-y-3">
               {features.map((feature, index) => (
                 <li key={index}>
-                  <button
-                    onClick={() => navigate(feature.path)}
-                    className="text-[#8A8A92] hover:text-cyan-400 transition-colors text-sm"
-                  >
+                  <button className="text-[#8A8A92] hover:text-cyan-400 transition-colors text-sm">
                     {feature.label}
                   </button>
                 </li>
