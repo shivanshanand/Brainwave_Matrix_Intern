@@ -2,7 +2,6 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-// Register
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -25,7 +24,6 @@ export const register = async (req, res) => {
   }
 };
 
-// Login
 export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -41,7 +39,7 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 2 * 24 * 60 * 60 * 1000,
       sameSite: "lax",
     });
@@ -60,20 +58,17 @@ export const login = async (req, res) => {
   }
 };
 
-// logout
 export const logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: "lax",
   });
   res.status(200).json({ msg: "Logged out successfully" });
 };
 
-// Get Current User (protected, returns public user info)
 export const getCurrentUser = async (req, res) => {
   try {
-    // req.user.id is set by your auth middleware
     const user = await User.findById(req.user.id).select("-password");
     if (!user) return res.status(404).json({ msg: "User not found" });
     res.json({ user });

@@ -13,6 +13,8 @@ dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -30,11 +32,9 @@ app.use("/api/auth", userRoutes);
 app.use("/api/expenses", expenseRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
-
-  app.get("/*path", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
-  });
+  const dist = path.join(__dirname, "../client/dist");
+  app.use(express.static(dist));
+  app.get("*", (_req, res) => res.sendFile(path.join(dist, "index.html")));
 }
 
 // Connect MongoDB, then start server

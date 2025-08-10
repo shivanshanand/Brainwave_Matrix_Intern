@@ -1,13 +1,13 @@
-// src/store/expenseStore.js
 import { create } from "zustand";
 import axios from "axios";
 import { generateInsights } from "../utils/generateInsights";
+
 const BASE_URL =
-  import.meta.env.MODE === "development"
-    ? import.meta.env.VITE_API_URL 
-    : "/"; 
+  import.meta.env.MODE === "development" ? import.meta.env.VITE_API_URL : "";
 
 const API = BASE_URL;
+
+axios.defaults.withCredentials = true;
 
 export const useExpenseStore = create((set, get) => ({
   expenses: [],
