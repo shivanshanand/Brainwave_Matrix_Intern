@@ -2,8 +2,12 @@
 import { create } from "zustand";
 import axios from "axios";
 import { generateInsights } from "../utils/generateInsights";
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? import.meta.env.VITE_API_URL 
+    : "/"; 
 
-const API = import.meta.env.VITE_API_URL;
+const API = BASE_URL;
 
 export const useExpenseStore = create((set, get) => ({
   expenses: [],
