@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Custom toast styles */
+.Toastify__toast-container {
+  font-family: inherit;
+}
+
+.Toastify__toast--success {
+  background: #121214;
+  border: 1px solid #26262b;
+  color: #ededef;
+}
+
+.Toastify__toast--error {
+  background: #121214;
+  border: 1px solid #7f1d1d;
+  color: #ededef;
+}
+
+.Toastify__toast--info {
+  background: #121214;
+  border: 1px solid #26262b;
+  color: #ededef;
+}
+
+.Toastify__progress-bar--success {
+  background: #34d399;
+}
+
+.Toastify__progress-bar--error {
+  background: #f43f5e;
+}
+
+.Toastify__close-button {
+  color: #8a8a92;
+}
+
+.Toastify__close-button:hover {
+  color: #ededef;
+}
+
+/* Add to your global CSS */
+.modal-open {
+  overflow: hidden;
+}
+
+.blur-content {
+  filter: blur(8px) brightness(0.7);
+  pointer-events: none;
+  --webkit-user-select: none;
+}
