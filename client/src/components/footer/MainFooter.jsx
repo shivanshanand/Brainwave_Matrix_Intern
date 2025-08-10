@@ -27,10 +27,10 @@ const MainFooter = () => {
   ];
 
   const supportLinks = [
-    { label: "Help Center", path: "/help" },
-    { label: "Contact Us", path: "/contact" },
-    { label: "Privacy Policy", path: "/privacy" },
-    { label: "Terms of Service", path: "/terms" },
+    { label: "Help Center" },
+    { label: "Contact Us" },
+    { label: "Privacy Policy" },
+    { label: "Terms of Service" },
   ];
 
   const features = [
@@ -138,7 +138,6 @@ const MainFooter = () => {
               {supportLinks.map((link, index) => (
                 <li key={index}>
                   <button
-                    onClick={() => navigate(link.path)}
                     className="text-[#8A8A92] hover:text-cyan-400 transition-colors text-sm"
                   >
                     {link.label}
