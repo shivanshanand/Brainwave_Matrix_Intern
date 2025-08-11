@@ -124,7 +124,7 @@ const Dashboard = () => {
               <DollarSign className="w-8 h-8 text-[#8A8A92]" />
             </div>
             <h2 className="text-2xl font-bold text-[#EDEDEF] mb-2">
-              No expenses yet
+              No transactions yet
             </h2>
             <p className="text-[#8A8A92] mb-6 max-w-md mx-auto">
               Start tracking your finances by adding your first expense or
@@ -138,7 +138,7 @@ const Dashboard = () => {
               className="h-12 px-6 rounded-xl bg-cyan-500 text-black font-semibold hover:bg-cyan-400 transition-all inline-flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
-              Add Your First Expense
+              Add Your First Transaction
             </button>
           </div>
         </div>
