@@ -11,6 +11,10 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedPassword });
 
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "2d",
+    });
+
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
