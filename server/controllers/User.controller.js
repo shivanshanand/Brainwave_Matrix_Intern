@@ -10,6 +10,14 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hashedPassword });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 2 * 24 * 60 * 60 * 1000,
+      sameSite: "lax",
+    });
+
     res.status(201).json({
       user: {
         id: user._id,
@@ -39,7 +47,7 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: process.env.NODE_ENV === "production",
       maxAge: 2 * 24 * 60 * 60 * 1000,
       sameSite: "lax",
     });
@@ -61,7 +69,7 @@ export const login = async (req, res) => {
 export const logout = (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
   });
   res.status(200).json({ msg: "Logged out successfully" });

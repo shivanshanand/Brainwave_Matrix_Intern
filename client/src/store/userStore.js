@@ -45,11 +45,11 @@ export const useUserStore = create((set, get) => ({
   register: async (name, email, password) => {
     set({ loading: true, error: null });
     try {
-      const res = await axios.post(
-        `${API}/api/auth/register`,
-        { name, email, password },
-        { withCredentials: true }
-      );
+      const res = await axios.post(`${API}/api/auth/register`, {
+        name,
+        email,
+        password,
+      });
       set({
         user: res.data.user,
         isGuest: false,
@@ -91,9 +91,7 @@ export const useUserStore = create((set, get) => ({
   checkSession: async () => {
     set({ loading: true });
     try {
-      const res = await axios.get(`${API}/api/auth/me`, {
-        withCredentials: true,
-      });
+      const res = await axios.get(`${API}/api/auth/me`);
       set({
         user: res.data.user,
         isGuest: false,
