@@ -7,7 +7,7 @@ A modern, privacy-first personal finance dashboard with clean analytics, AI insi
 - AI-powered insights
 - Authenticated dashboard with protected routes
 
-Live Demo: Coming soon
+[Live Demo](https://finsight-vykk.onrender.com/)
 
 ## Tech Stack
 
