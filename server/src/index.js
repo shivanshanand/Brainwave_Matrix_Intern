@@ -86,8 +86,6 @@ app.get("/", (req, res) => {
       "Real-time Features",
       "User Profiles & Following",
     ],
-    database:
-      mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
     message: "🚀 NexBlog API is running smoothly!",
   });
 });
