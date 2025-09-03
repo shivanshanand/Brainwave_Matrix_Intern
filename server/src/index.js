@@ -31,7 +31,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "your-frontend-domain.com"
+        ? [process.env.FRONTEND_URL, /\.vercel\.app$/]
         : "http://localhost:5173",
     credentials: true,
   })
@@ -102,7 +102,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 
 const server = app.listen(PORT, () => {
   console.log(
