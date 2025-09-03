@@ -60,11 +60,35 @@ app.use("/api/comments", commentRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/meta", metaRoutes);
 
-app.get("/api/health", (req, res) => {
+app.get("/", (req, res) => {
   res.json({
     status: "OK",
+    service: "NexBlog API",
+    version: "1.0.0",
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
+    environment: process.env.NODE_ENV || "development",
+    uptime: process.uptime(),
+    memory: {
+      used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + " MB",
+      total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + " MB",
+    },
+    endpoints: {
+      auth: "/api/auth",
+      users: "/api/users",
+      posts: "/api/posts",
+      comments: "/api/comments",
+      upload: "/api/upload",
+    },
+    features: [
+      "User Authentication",
+      "Blog Posts & Comments",
+      "File Uploads",
+      "Real-time Features",
+      "User Profiles & Following",
+    ],
+    database:
+      mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
+    message: "🚀 NexBlog API is running smoothly!",
   });
 });
 
@@ -76,7 +100,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Catch-all 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
