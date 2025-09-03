@@ -5,9 +5,12 @@ import { useAuth } from "../../store/authStore";
 import API from "../../api/axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useUploads } from "../../store/uploadStore";
 
 const EditProfileModal = ({ open, onClose, userProfile, setUserProfile }) => {
   const { setUser } = useAuth();
+  const { uploadAvatar } = useUploads();
+
   const navigate = useNavigate();
   const [form, setForm] = useState({
     username: userProfile?.username || "",
@@ -46,13 +49,15 @@ const EditProfileModal = ({ open, onClose, userProfile, setUserProfile }) => {
         toast.error("Image size must be less than 5MB");
         return;
       }
-
       setSelectedFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setForm((prev) => ({ ...prev, avatar: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      // ✅ Upload to Cloudinary via backend
+      try {
+        const url = await uploadAvatar(file); // returns Cloudinary URL
+        setForm((prev) => ({ ...prev, avatar: url }));
+        toast.success("Avatar uploaded!");
+      } catch (err) {
+        toast.error("Failed to upload avatar");
+      }
     }
   };
 
@@ -70,7 +75,6 @@ const EditProfileModal = ({ open, onClose, userProfile, setUserProfile }) => {
     setLoading(true);
     try {
       const payload = { ...form };
-
       if (!form.avatar) {
         delete payload.avatar;
       }
