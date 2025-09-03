@@ -9,7 +9,7 @@ import {
   HiTrendingUp,
   HiUser,
 } from "react-icons/hi";
-import { Twitter, Github, Linkedin, Instagram } from "lucide-react";
+import { Twitter, Github, Linkedin, Instagram, PenLine } from "lucide-react";
 import { FaDiscord } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useState } from "react";
@@ -54,7 +54,7 @@ const Footer = () => {
       toast.error("Please enter a valid email address!");
     } else {
       toast.success("🎉 Subscribed successfully!");
-      setEmail(""); 
+      setEmail("");
     }
   };
 
@@ -67,7 +67,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                <HiSparkles className="w-6 h-6 text-white" />
+                <PenLine className="text-black w-5 h-5 font-bold" />
               </div>
               <div>
                 <div className="text-2xl font-bold text-white">NexBlog</div>
@@ -229,7 +229,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer;
